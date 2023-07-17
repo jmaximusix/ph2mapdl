@@ -19,18 +19,22 @@ impl Theme for ItemSelectorStyle {
         text: &str,
         _active: bool,
     ) -> std::fmt::Result {
-        write!(f, "{text}")
+        write!(
+            f,
+            "{}\n\n{text}",
+            "Select Map using arrow keys. Enter to select. Esc for more options".bright_black()
+        )
     }
 }
 
 pub struct WorkshopItem {
     pub id: u64,
     pub title: String,
+    pub installed: bool,
     creator: String,
     description: ItemDescription,
     favorited: u16,
     subscribed: u16,
-    installed: bool,
 }
 
 impl WorkshopItem {
@@ -38,7 +42,6 @@ impl WorkshopItem {
         let creator_name = &creators[&entry["creator"].as_str().unwrap().parse().unwrap()];
         let mid = entry["publishedfileid"].as_str().unwrap().parse().unwrap();
         let path = format!("{}/steamapps/workshop/content/{APP_ID}/{}", installdir, mid);
-        println!("{}", path);
         Self {
             id: mid,
             title: entry["title"].as_str().unwrap().to_string(),
@@ -69,7 +72,7 @@ impl Display for WorkshopItem {
             hyperlink,
             String::from("by").cyan(),
             self.creator.cyan(),
-            installed_status.green(),
+            installed_status.bright_green(),
             self.description,
             self.subscribed,
             self.favorited,

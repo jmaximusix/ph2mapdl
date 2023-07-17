@@ -1,3 +1,4 @@
 /target
-steamapps/
+test_install_dir/
+Game.ini
 .env
