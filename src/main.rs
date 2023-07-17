@@ -15,6 +15,8 @@ use std::process::Command;
 #[command(author, version, about, long_about = None)]
 struct Cli {
     start_search: Vec<String>,
+    #[arg(long, short, default_value_t = 5)]
+    page_size: usize,
     #[arg(long)]
     no_action: bool,
     #[arg(long)]
@@ -48,7 +50,7 @@ fn main() {
     let mut params: Params = HashMap::from([
         ("key", key.clone()),
         // ("query_type", String::from("0")),
-        ("numperpage", String::from("5")),
+        ("numperpage", cli.page_size.to_string()),
         ("appid", APP_ID.to_string()),
         ("search_text", String::new()),
         ("cursor", String::from("*")),
