@@ -132,7 +132,7 @@ fn process_selection(item: &WorkshopItem, install_dir: &str, cli: &Cli) {
     println!(
         "{item}\n\n{} {}",
         format!("Selected Map: {}", item.title).green(),
-        format!("({})", item.id).black()
+        format!("({})", item.id).bright_black()
     );
     if cli.no_action {
         println!("{}", "No action taken. Exiting.".yellow());
